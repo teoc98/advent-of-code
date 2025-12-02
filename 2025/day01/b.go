@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/teoc98/advent-of-code/2025/utils"
 	"log"
 	"os"
 	"strconv"
@@ -20,7 +21,7 @@ func main() {
 	}
 	defer file.Close()
 
-	mod := 100
+	marks := 100
 	position := 50
 	timesPointedAtZero := 0
 
@@ -49,28 +50,28 @@ func main() {
 
 		prevPosition := position
 		position = position + dir*num
+		actualPosition := utils.Mod(position, marks)
+		clicks := (position - actualPosition) / marks
 
 		if position == 0 {
 			timesPointedAtZero += 1
 		}
-		
+
 		if position < 0 {
 			if prevPosition == 0 {
 				timesPointedAtZero -= 1
 			}
-			for position < 0 {
-				position += mod
-				timesPointedAtZero += 1
-			}
-			if position == 0 {
+			timesPointedAtZero -= clicks
+			if actualPosition == 0 {
 				timesPointedAtZero += 1
 			}
 		}
 
-		for position >= mod {
-			position -= mod
-			timesPointedAtZero += 1
+		if position >= marks {
+			timesPointedAtZero += clicks
 		}
+
+		position = actualPosition
 	}
 
 	if err := scanner.Err(); err != nil {
