@@ -50,6 +50,10 @@ func main() {
 		prevPosition := position
 		position = position + dir*num
 
+		if position == 0 {
+			timesPointedAtZero += 1
+		}
+		
 		if position < 0 {
 			if prevPosition == 0 {
 				timesPointedAtZero -= 1
@@ -61,10 +65,6 @@ func main() {
 			if position == 0 {
 				timesPointedAtZero += 1
 			}
-		}
-
-		if position == 0 {
-			timesPointedAtZero += 1
 		}
 
 		for position >= mod {
