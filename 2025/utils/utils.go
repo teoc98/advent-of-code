@@ -34,3 +34,24 @@ func MapErr[T any, U any](in []T, f func(T) (U, error)) ([]U, error) {
 	}
 	return out, nil
 }
+
+func SliceAppend[T any](slice []T, data ...T) []T {
+	m := len(slice)
+	n := m + len(data)
+	if n > cap(slice) { // if necessary, reallocate
+		// allocate double what's needed, for future growth.
+		newSlice := make([]T, (n+1)*2)
+		copy(newSlice, slice)
+		slice = newSlice
+	}
+	slice = slice[0:n]
+	copy(slice[m:n], data)
+	return slice
+}
+
+func Btoi(b bool) int {
+	if b {
+		return 1
+	}
+	return 0
+}
