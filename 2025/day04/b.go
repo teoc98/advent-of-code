@@ -15,8 +15,8 @@ func isRoll(x byte) bool {
 
 func neighbourRolls(diagram [][]byte, i, j int) int {
 	x := 0
-	for ni := max(0, i - 1); ni <= min(len(diagram) - 1, i + 1); ni += 1 {
-		for nj := max(0, j - 1); nj <= min(len(diagram[ni]) - 1, j + 1); nj += 1 {
+	for ni := max(0, i-1); ni <= min(len(diagram)-1, i+1); ni += 1 {
+		for nj := max(0, j-1); nj <= min(len(diagram[ni])-1, j+1); nj += 1 {
 			x += utils.Btoi(isRoll(diagram[ni][nj]))
 		}
 	}
@@ -49,7 +49,7 @@ func main() {
 		if line == "" {
 			continue
 		}
-		
+
 		diagram = utils.SliceAppend(diagram, []byte(line))
 	}
 
@@ -57,7 +57,7 @@ func main() {
 	for foundNew {
 		foundNew = false
 		n := len(diagram)
-		for i := 0; i < n; i+=1 {
+		for i := 0; i < n; i += 1 {
 			m := len(diagram[i])
 			for j := 0; j < m; j += 1 {
 				if isRollAndAccessible(diagram, i, j) {
@@ -73,5 +73,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("%d\n", accessibleRolls )
+	fmt.Printf("%d\n", accessibleRolls)
 }

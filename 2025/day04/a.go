@@ -56,7 +56,7 @@ func main() {
 		prevAdj = currAdj
 		currAdj = nextAdj
 		nextAdj = adjcentRolls(nextLine)
-		
+
 		n := len(currLine)
 		for j := 0; j < n; j += 1 {
 			if isRoll(currLine[j]) {
